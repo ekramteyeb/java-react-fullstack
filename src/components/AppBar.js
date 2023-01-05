@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -25,7 +26,8 @@ export default function ButtonAppBar() {
             Java-React Full Stack - app 
           </Typography>
           
-            <Link to="/createStudent">Create Student</Link>
+          <Link to="/createStudent">Create Student</Link>
+          <Button><Link to="/checkPhone">Check Phone</Link></Button>
           
           
           {/* <Button color="inherit">Login</Button> */}

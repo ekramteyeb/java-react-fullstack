@@ -6,6 +6,7 @@ import CreateStudent from "./pages/CreateStudent";
 import EditStudentPage from './pages/EditStudent';
 import Contact from "./pages/Contact";
 import NoPages from './pages/NoPages';
+import CheckPhone from './pages/CheckPhone';
 
 export default function Router({students}) {
  
@@ -14,6 +15,7 @@ export default function Router({students}) {
         <Route path="/" element={<Layout />}>
         <Route index element={<Home students={students } />} />
           <Route path="createStudent" element={<CreateStudent />} />
+          <Route path="checkPhone" element={<CheckPhone />} />
           <Route path={`editStudent/:id/:names/:emails/:dobs`} element={<EditStudentPage />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NoPages />} />
