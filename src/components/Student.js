@@ -15,6 +15,8 @@ export default function Student() {
   const [dob, setDOB] = useState('2010-08-18');
   const [message, setMessage] = useState('')
   
+  message && setTimeout(() => setMessage(''), 2000) 
+
   const handleChange = (newValue) => {
     let dobs = `${newValue.$y}-${newValue.$M}-${newValue.$D}`;
     setDOB(new Date(dobs).toISOString().slice(0, 10));
@@ -23,11 +25,11 @@ export default function Student() {
     e.preventDefault();
     const student = { name, email, dob }; 
     if (!name || !email || !dob) {
-      setMessage("* All field are required");
-      setTimeout(() => setMessage(''), 2000)
+      setMessage("All field are required");
+      
       return 
     }
-      console.log(student, "student");
+      //console.log(student, "student");
       fetch(
           'http://localhost:8080/api/v1/student',
           {
@@ -38,7 +40,10 @@ export default function Student() {
             body:JSON.stringify(student)
           }
       ).then(result => console.log("Saved successfully") + result)
-      .catch(error => console.log(error + "Create operation failed"))
+        .catch(function (error) {
+          console.log(error + "Create operation failed")
+          setMessage("Something went wrong try again")
+      })
 
   }
   return (
@@ -47,7 +52,7 @@ export default function Student() {
       <Paper elevation={3} style={{ padding:10 }} >
         <Link to="/">x</Link>
         <h1>Add student</h1>
-        { message ? message : ''}
+        { message ? <p style={{ color:'red' }}>* { message}</p> : ''}
           <Box
             component="form"
             sx={{
@@ -74,7 +79,7 @@ export default function Student() {
           {/* </Stack> */}
           </LocalizationProvider>
             <br/>
-            <Button variant="contained" onClick={handleClick} style={{ width:"14%" }}><Link to={(!name || !email ) ? "/createStudent" : "/"}>Add </Link></Button>
+            <Button variant="contained" onClick={handleClick} style={{ width:"14%" }}><Link to={(!name || !email || !message ) ? "/createStudent" : "/"}>Add </Link></Button>
            
           </Box>
       </Paper>
