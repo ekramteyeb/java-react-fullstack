@@ -13,17 +13,23 @@ export default function Student() {
   const [name, setName] = useState('');
   /* const [dob, setDOB] = useState(''); */
   const [dob, setDOB] = useState('2010-08-18');
-
-  console.log(new Date(dob).toISOString().slice(0, 10), "Date value")
+  const [message, setMessage] = useState('')
   
   const handleChange = (newValue) => {
-    setDOB(`${newValue.$y}-${newValue.$M}-${newValue.$D}`);
+    let dobs = `${newValue.$y}-${newValue.$M}-${newValue.$D}`;
+    setDOB(new Date(dobs).toISOString().slice(0, 10));
   };
   const handleClick = (e) => {
-      const student = {name, email, dob}; 
+    e.preventDefault();
+    const student = { name, email, dob }; 
+    if (!name || !email || !dob) {
+      setMessage("* All field are required");
+      setTimeout(() => setMessage(''), 2000)
+      return 
+    }
       console.log(student, "student");
       fetch(
-          'http://localhost:8080/api/v1/studentss',
+          'http://localhost:8080/api/v1/student',
           {
             method:'POST',
             headers:{
@@ -41,7 +47,7 @@ export default function Student() {
       <Paper elevation={3} style={{ padding:10 }} >
         <Link to="/">x</Link>
         <h1>Add student</h1>
-       {/*  {value} */}
+        { message ? message : ''}
           <Box
             component="form"
             sx={{
@@ -68,7 +74,7 @@ export default function Student() {
           {/* </Stack> */}
           </LocalizationProvider>
             <br/>
-            <Button variant="contained" onClick={handleClick} style={{ width:"14%" }}><Link to="/">Add </Link></Button>
+            <Button variant="contained" onClick={handleClick} style={{ width:"14%" }}><Link to={(!name || !email ) ? "/createStudent" : "/"}>Add </Link></Button>
            
           </Box>
       </Paper>
