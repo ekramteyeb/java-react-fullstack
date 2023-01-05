@@ -10,12 +10,14 @@ export default function Students({ students }) {
     return (
         <Container >
             <p id="jumb"></p>
+            
             <Paper elevation={3} style={{ padding: '10px', margin: '10px auto' }}>
                 <h2>All students</h2>
                 {
                     students && students.map(student =>
-                    <Paper key={student.id} elevation={2} style={paperStyle}>
-                    <Stack spacing={1}>
+                    <Stack spacing={3} key={student.id}>
+                    <Paper key={student.id} elevation={2} style={{ ...paperStyle, width:'90%' } }>
+                    
                         {student.name}<br/>
                         {student.email}<br/>
                         {student.dob}<br/>
@@ -34,11 +36,13 @@ export default function Students({ students }) {
                 
                         </Button>
                         <Button variant="contained" style={{ background: 'red' }}>Delete</Button>
-                    </Stack>
-                    </Paper> 
+                    
+                        </Paper> 
+                        </Stack>
                     )
 
-                }
+                    }
+                
             <a id="jumpfrom" href='#jumb'>Go to top</a>
         </Paper>
 
