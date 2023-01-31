@@ -115,9 +115,10 @@ function DrawerAppBar(props) {
       </Box>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <h3>Java-React full stack app </h3>
+        <h3 style={{ margin:'auto' }}>Java-React full stack app </h3>
         <Typography>
           {/* write some text here */}
+         
         </Typography>
       </Box>
     </Box>
